@@ -42,10 +42,10 @@ export default async function Header() {
           </div>
           
           <nav className="hidden md:flex space-x-8">
-            <Link href="#home" className="text-gray-600 hover:text-gray-900">Home</Link>
-            <Link href="#about" className="text-gray-600 hover:text-gray-900">About</Link>
-            <Link href="#projects" className="text-gray-600 hover:text-gray-900">Projects</Link>
-            <Link href="#contact" className="text-gray-600 hover:text-gray-900">Contact</Link>
+            <Link href="/home" className="text-gray-600 hover:text-gray-900">Home</Link>
+            <Link href="/about" className="text-gray-600 hover:text-gray-900">About</Link>
+            <Link href="/projects" className="text-gray-600 hover:text-gray-900">Projects</Link>
+            <Link href="/contact" className="text-gray-600 hover:text-gray-900">Contact</Link>
           </nav>
           
           <div className="md:hidden">
