@@ -7,6 +7,7 @@ import GetStartedCode from "@/app/components/GetStartedCode";
 import SideBySideIcons from "@/app/components/SideBySideIcons";
 import { settingsQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/live";
+import HomePage from "./pages";
 
 export default async function Page() {
   const { data: settings } = await sanityFetch({
@@ -15,7 +16,7 @@ export default async function Page() {
 
   return (
     <>
-      <div className="relative">
+      {/* <div className="relative">
         <div className="relative bg-[url(/images/tile-1-black.png)] bg-size-[5px]">
           <div className="bg-gradient-to-b from-white w-full h-full absolute top-0"></div>
           <div className="container">
@@ -36,7 +37,9 @@ export default async function Page() {
             <Suspense>{await AllPosts()}</Suspense>
           </aside>
         </div>
-      </div>
+      </div> */}
+
+      <HomePage />
     </>
   );
 }

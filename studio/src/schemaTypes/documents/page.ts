@@ -20,6 +20,45 @@ export const page = defineType({
     }),
 
     defineField({
+      name: 'features',
+      title: 'Features',
+      type: 'array',
+      of: [
+        defineField({
+          name: 'feature',
+          title: 'Feature',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'title',
+              title: 'Title',
+              type: 'string',
+            }),
+            defineField({
+              name: 'image',
+              title: 'Image',
+              type: 'image',
+              options: {
+                hotspot: true,
+              },
+              fields: [
+                defineField({
+                  name: 'alt',
+                  title: 'Alt Text',
+                  type: 'string',
+                  // options: {
+                  //   isHighlighted: true,
+                  // },
+                }),
+              ],
+            }),
+          ],
+        }),
+      ],
+      validation: (Rule) => Rule.required(),
+    }),
+
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -47,12 +86,50 @@ export const page = defineType({
     }),
     defineField({
       name: 'pageBuilder',
-      title: 'Page builder',
+      title: 'Page Builder',
       type: 'array',
-      of: [{type: 'callToAction'}, {type: 'infoSection'}],
+      of: [
+        { type: 'callToAction' },
+        { type: 'infoSection' },
+        {
+          type: 'image',
+          name: 'imageBlock',
+          title: 'Image',
+          options: { hotspot: true },
+          fields: [
+            {
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+              options: { isHighlighted: true },
+            },
+          ],
+        },
+        {
+          name: 'htmlBlock',
+          title: 'HTML Block',
+          type: 'object',
+          fields: [
+            {
+              name: 'html',
+              title: 'Raw HTML',
+              type: 'text',
+              description: 'Use this to inject custom HTML directly into the page.',
+            },
+          ],
+          preview: {
+            select: { html: 'html' },
+            prepare({ html }) {
+              return {
+                title: 'HTML Block',
+                subtitle: html?.substring(0, 40) || 'Raw HTML content',
+              }
+            },
+          },
+        },
+      ],
       options: {
         insertMenu: {
-          // Configure the "Add Item" menu to display a thumbnail preview of the content type. https://www.sanity.io/docs/array-type#efb1fe03459d
           views: [
             {
               name: 'grid',
@@ -62,6 +139,6 @@ export const page = defineType({
           ],
         },
       },
-    }),
+    })
   ],
 })

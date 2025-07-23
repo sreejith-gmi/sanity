@@ -1,5 +1,5 @@
-import {defineField, defineType} from 'sanity'
-import {TextIcon} from '@sanity/icons'
+import { defineField, defineType } from 'sanity'
+import { TextIcon } from '@sanity/icons'
 
 export const infoSection = defineType({
   name: 'infoSection',
@@ -17,10 +17,41 @@ export const infoSection = defineType({
       title: 'Subheading',
       type: 'string',
     }),
+
+    // ✅ Content Header Image
+    defineField({
+      name: 'headerImage',
+      title: 'Header Image',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+        }),
+      ],
+    }),
+
     defineField({
       name: 'content',
       title: 'Content',
       type: 'blockContent',
+    }),
+
+    // ✅ Main Image
+    defineField({
+      name: 'image',
+      title: 'Main Image',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+        }),
+      ],
     }),
   ],
   preview: {
@@ -28,10 +59,10 @@ export const infoSection = defineType({
       title: 'heading',
       subtitle: 'subheading',
     },
-    prepare({title}) {
+    prepare({ title, subtitle }) {
       return {
         title: title || 'Untitled Info Section',
-        subtitle: 'Info Section',
+        subtitle: subtitle || 'Info Section',
       }
     },
   },

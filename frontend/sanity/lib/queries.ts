@@ -95,3 +95,17 @@ export const pagesSlugs = defineQuery(`
   *[_type == "page" && defined(slug.current)]
   {"slug": slug.current}
 `);
+
+export const bannerQuery = `
+*[_type == "banner"][0]{
+  title,
+  subtitle,
+  ctaText,
+  ctaLink,
+  backgroundImage {
+    asset->{url},
+    alt
+  }
+}
+`
+
