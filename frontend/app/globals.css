@@ -7,6 +7,10 @@
   padding: 0 2rem;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @theme {
   --shadow-layer: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
 
@@ -33,3 +37,4 @@
 
   --default-transition-duration: 250ms;
 }
+

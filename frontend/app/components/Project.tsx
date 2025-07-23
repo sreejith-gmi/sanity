@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { sanityFetch } from "@/sanity/lib/live";
-import { morePostsQuery, allPostsQuery } from "@/sanity/lib/queries";
+import { moreProjectQuery, allProjectQuery } from "@/sanity/lib/queries";
 import { Post as PostType, AllPostsQueryResult } from "@/sanity.types";
 import DateComponent from "@/app/components/Date";
 import OnBoarding from "@/app/components/Onboarding";
@@ -10,11 +10,11 @@ import { createDataAttribute } from "next-sanity";
 import Image from "next/image";
 import CoverImage from "./CoverImage";
 
-const Post = ({ post }: { post: AllPostsQueryResult[number] }) => {
-  const { _id, title, slug, excerpt, date, author, coverImage } = post;
+const Project = ({ project }: { project: AllPostsQueryResult[number] }) => {
+  const { _id, title, slug, excerpt, date, author, coverImage, content } = project;
   const attr = createDataAttribute({
     id: _id,
-    type: "post",
+    type: "project",
     path: "title",
   });
   
@@ -60,44 +60,31 @@ const Post = ({ post }: { post: AllPostsQueryResult[number] }) => {
     //   </div>
     // </article>
 
-    <div className="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden shadow-sm">
-        <div className="w-full">
-          {
-            coverImage &&
-            <CoverImage image={coverImage} />
-          }
-        </div>  
-        <div className="p-6">
-          <p className="text-sm text-gray-500 mb-2">
-            <time className="text-gray-500 text-xs font-mono" dateTime={date}>
-                <DateComponent dateString={date} />
-            </time>
-          </p>
+    <div 
+      data-sanity={attr()} 
+      key={_id}
+      className="bg-white shadow rounded-lg overflow-hidden"
+    >
+      <div className="w-full">
+             {
+               coverImage &&
+               <CoverImage image={coverImage} />
+             }
+      </div> 
 
-          <h3 className="text-xl font-semibold text-gray-800 mb-2">
-            {title}
-          </h3>
+      <div className="p-6">
+        <h3 className="text-xl font-semibold text-gray-800 mb-1">{title}</h3>
+        <p className="text-sm text-gray-500 mb-2"> {excerpt}  </p>
 
-        <div className="w-full mt-4">
-          {
-              author && author.firstName && author.lastName && (
-                <div className="flex items-center">
-                  <Avatar person={author} small={true} />
-                </div>
-              )
-            }
-         </div>
-
-          <p className="text-gray-700 text-sm mt-4">
-            {excerpt}
-          </p>
-        
-        </div>
-    </div>
+        <p className="text-gray-700 mb-4">
+          {content}
+        </p>       
+      </div>
+    </div> 
   );
 };
 
-const Posts = ({
+const Projects = ({
   children,
   heading,
   subHeading,
@@ -106,14 +93,16 @@ const Posts = ({
   heading?: string;
   subHeading?: string;
 }) => (
-  <div className="pt-20 pb-20 px-20 w-full">
-    {heading && (
-      <h2 className="text-4xl font-bold text-gray-800 text-center"> {heading}</h2>      
+  <div className="pt-6 pb-20 px-7 w-full">
+    {/* {heading && (
+      <h2 className="text-xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:text-3xl">
+        {heading}
+      </h2>
     )}
     {subHeading && (
-      <p className="mt-2 text-lg leading-8 text-gray-600 text-center">{subHeading}</p>
-    )}
-    <div className="pt-8 space-y-6">
+      <p className="mt-2 text-lg leading-8 text-gray-600">{subHeading}</p>
+    )} */}
+    <div className="pt-6 space-y-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {children}
       </div>
@@ -121,7 +110,7 @@ const Posts = ({
   </div>
 );
 
-export const MorePosts = async ({
+export const MoreProjects = async ({
   skip,
   limit,
 }: {
@@ -129,7 +118,7 @@ export const MorePosts = async ({
   limit: number;
 }) => {
   const { data } = await sanityFetch({
-    query: morePostsQuery,
+    query: moreProjectQuery,
     params: { skip, limit },
   });
 
@@ -138,27 +127,27 @@ export const MorePosts = async ({
   }
 
   return (
-    <Posts heading={`Recent Posts (${data?.length})`}>
-      {data?.map((post: any) => <Post key={post._id} post={post} />)}
-    </Posts>
+    <Projects heading={`Recent Project (${data?.length})`}>
+      {data?.map((post: any) => <Project key={post._id} project={post} />)}
+    </Projects>
   );
 };
 
-export const AllPosts = async () => {
-  const { data } = await sanityFetch({ query: allPostsQuery });
+export const AllProjects = async () => {
+  const { data } = await sanityFetch({ query: allProjectQuery });
 
   if (!data || data.length === 0) {
     return <OnBoarding />;
   }
 
   return (
-    <Posts
-      heading="Recent Posts"
-      subHeading={`${data.length === 1 ? "This blog post is" : `These ${data.length} blog posts`}`}
+    <Projects
+      heading="Recent Project"
+      subHeading={`${data.length === 1 ? "This Project is" : `These ${data.length} Project`}`}
     >
       {data.map((post: any) => (
-        <Post key={post._id} post={post} />
+        <Project key={post._id} project={post} />
       ))}
-    </Posts>
+    </Projects>
   );
 };

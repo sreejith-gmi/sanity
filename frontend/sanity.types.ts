@@ -605,6 +605,7 @@ export type AllPostsQueryResult = Array<{
   _id: string;
   status: "draft" | "published";
   title: string;
+  content:string;
   slug: string;
   excerpt: string | null;
   coverImage: {

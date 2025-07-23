@@ -96,10 +96,36 @@ export const pagesSlugs = defineQuery(`
   {"slug": slug.current}
 `);
 
+export const allProjectQuery = defineQuery(`
+  *[_type == "project" && defined(slug.current)] | order(date desc, _updatedAt desc) {
+    ${postFields}
+  }
+`);
+
+export const moreProjectQuery = defineQuery(`
+  *[_type == "project" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {
+    ${postFields}
+  }
+`);
+
 export const bannerQuery = `
 *[_type == "banner"][0]{
   title,
   subtitle,
+  ctaText,
+  ctaLink,
+  backgroundImage {
+    asset->{url},
+    alt
+  }
+}
+`
+
+export const aboutQuery = `
+*[_type == "about"][0]{
+  title,
+  subtitle,
+  content,
   ctaText,
   ctaLink,
   backgroundImage {

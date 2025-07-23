@@ -33,38 +33,50 @@ export default async function Header() {
     //   </div>
     // </header>
 
-    <header className="bg-white shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+    // <header className="bg-white shadow-md">
+    //   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    //     <div className="flex justify-between items-center h-16">
                     
-          <div className="flex-shrink-0">
-            <Link href="/" className="text-xl font-bold text-gray-800">MySite</Link>
-          </div>
+    //       <div className="flex-shrink-0">
+    //         <Link href="/" className="text-xl font-bold text-gray-800">MySite</Link>
+    //       </div>
           
-          <nav className="hidden md:flex space-x-8">
-            <Link href="/home" className="text-gray-600 hover:text-gray-900">Home</Link>
-            <Link href="/about" className="text-gray-600 hover:text-gray-900">About</Link>
-            <Link href="/projects" className="text-gray-600 hover:text-gray-900">Projects</Link>
-            <Link href="/contact" className="text-gray-600 hover:text-gray-900">Contact</Link>
-          </nav>
+    //       <nav className="hidden md:flex space-x-8">
+    //         <Link href="#home" className="text-gray-600 hover:text-gray-900">Home</Link>
+    //         <Link href="#about" className="text-gray-600 hover:text-gray-900">About</Link>
+    //         <Link href="#projects" className="text-gray-600 hover:text-gray-900">Projects</Link>
+    //         <Link href="#contact" className="text-gray-600 hover:text-gray-900">Contact</Link>
+    //       </nav>
           
-          <div className="md:hidden">
-            <button type="button" className="text-gray-800 focus:outline-none" id="mobile-menu-button">
-              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
+    //       <div className="md:hidden">
+    //         <button type="button" className="text-gray-800 focus:outline-none" id="mobile-menu-button">
+    //           <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    //             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+    //               d="M4 6h16M4 12h16M4 18h16" />
+    //           </svg>
+    //         </button>
+    //       </div>
+    //     </div>
+    //   </div>
 
-      <div className="md:hidden hidden px-4 pb-4 space-y-2" id="mobile-menu">
-        <Link href="#home" className="block text-gray-700 hover:text-gray-900">Home</Link>
-        <Link href="#about" className="block text-gray-700 hover:text-gray-900">About</Link>
-        <Link href="#projects" className="block text-gray-700 hover:text-gray-900">Projects</Link>
-        <Link href="#contact" className="block text-gray-700 hover:text-gray-900">Contact</Link>
+    //   <div className="md:hidden hidden px-4 pb-4 space-y-2" id="mobile-menu">
+    //     <Link href="#home" className="block text-gray-700 hover:text-gray-900">Home</Link>
+    //     <Link href="#about" className="block text-gray-700 hover:text-gray-900">About</Link>
+    //     <Link href="#projects" className="block text-gray-700 hover:text-gray-900">Projects</Link>
+    //     <Link href="#contact" className="block text-gray-700 hover:text-gray-900">Contact</Link>
+    //   </div>
+    // </header>
+
+    <nav className="bg-transparent relative z-20 text-white">
+      <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
+        <h1 className="text-xl font-bold">MyWebsite</h1>
+        <ul className="flex space-x-14">
+          <li><a href="#about" className="hover:text-green-600">About</a></li>
+          <li><a href="#projects" className="hover:text-green-600">Projects</a></li>
+          <li><a href="#blog" className="hover:text-green-600">Blog</a></li>
+          <li><a href="#contact" className="hover:text-green-600">Contact</a></li>
+        </ul>
       </div>
-    </header>
+    </nav>
   );
 }
