@@ -11,7 +11,7 @@ import Image from "next/image";
 import CoverImage from "./CoverImage";
 
 const Project = ({ project }: { project: AllPostsQueryResult[number] }) => {
-  const { _id, title, slug, excerpt, date, author, coverImage, content } = project;
+  const { _id, title, slug, excerpt, date, author, coverImage } = project;
   const attr = createDataAttribute({
     id: _id,
     type: "project",
@@ -74,11 +74,7 @@ const Project = ({ project }: { project: AllPostsQueryResult[number] }) => {
 
       <div className="p-6">
         <h3 className="text-xl font-semibold text-gray-800 mb-1">{title}</h3>
-        <p className="text-sm text-gray-500 mb-2"> {excerpt}  </p>
-
-        <p className="text-gray-700 mb-4">
-          {content}
-        </p>       
+        <p className="text-sm text-gray-500 mb-2"> {excerpt}  </p>      
       </div>
     </div> 
   );
